@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const app = express();
 
-const User = require('./models/user')
+const User = require('./models/usuario')
 
 
 const db =require('./db')
@@ -46,7 +46,7 @@ app.post('/register', (req, res) => {
     res.redirect("/login");
   })
   .catch(err => {
-    res.status(500).send("error pa");
+    res.status(500).send("error al ingresar los datos");
   });
 })
 
@@ -60,11 +60,11 @@ app.post('/authenticate', (req, res) => {
       } else {
         user.isCorrectPassword(password, (err, result) => {
           if (err) {
-            res.status(500).send("Error autenticando");
+            res.status(500).send("Error de autenticacion");
           } else if (result) {
-            res.status(200).send('Correctamente opapep pa');
+            res.status(200).send('Correctamente autenticado');
           } else {
-            res.status(500).send("Incorrecto alguito pa");
+            res.status(500).send("Contraseña/Usuario incorrecto");
           }
         });
       }
