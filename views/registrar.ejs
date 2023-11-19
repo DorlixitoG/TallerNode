@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('template/cabecera',{tituloweb:'registrar'}) %>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
- 
-</head>
+<%- include('template/cabecera',{tituloweb:'registrar'}) %>
 
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+  </head>
+
   <body class="align">
-    
+
     <div class="grid">
-        <h2>Registrar</h2>
+      <h2>Registrar</h2>
       <form action="/register" method="POST" class="form login">
 
         <div class="form__field">
@@ -24,12 +24,12 @@
         </div>
 
         <div class="form__field">
-            <label for="login__username"><svg class="icon">
-                <use xlink:href="#icon-user"></use>
-              </svg><span class="hidden">Correo</span></label>
-            <input autocomplete="email" id="login_email" type="email" name="email" class="form_input"
-              placeholder="Correo" required>
-          </div>
+          <label for="login__username"><svg class="icon">
+              <use xlink:href="#icon-user"></use>
+            </svg><span class="hidden">Correo</span></label>
+          <input autocomplete="email" id="login_email" type="email" name="email" class="form_input" placeholder="Correo"
+            required>
+        </div>
 
         <div class="form__field">
           <label for="login__password"><svg class="icon">
@@ -46,7 +46,7 @@
 
       </form>
 
-     
+
     </div>
 
     <svg xmlns="http://www.w3.org/2000/svg" class="icons">
@@ -65,6 +65,5 @@
     </svg>
 
   </body>
-</body>
 
 </html>
