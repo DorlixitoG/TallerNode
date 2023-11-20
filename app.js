@@ -35,6 +35,11 @@ app.get("/registrar", (req, res) => {
   res.render("registrar", {});
 });
 
+app.get('/index', (req, res) => {
+  res.render('index'); 
+});
+
+
 
 app.post('/register', (req, res) => {
   const {username,email,password} = req.body
@@ -56,13 +61,13 @@ app.post('/authenticate', (req, res) => {
   User.findOne({ username })
     .then(user => {
       if (!user) {
-        res.status(500).send("No existe pa");
+        res.status(500).send("No existe");
       } else {
         user.isCorrectPassword(password, (err, result) => {
           if (err) {
             res.status(500).send("Error de autenticacion");
           } else if (result) {
-            res.status(200).send('Correctamente autenticado');
+            res.redirect('/index');
           } else {
             res.status(500).send("Contraseña/Usuario incorrecto");
           }
@@ -73,6 +78,7 @@ app.post('/authenticate', (req, res) => {
       res.status(500).send("Error pa");
     });
 });
+
 
 
 app.listen(3000, () => {
