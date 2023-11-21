@@ -36,9 +36,12 @@ app.get("/registrar", (req, res) => {
 });
 
 app.get('/index', (req, res) => {
-  res.render('index'); 
+  res.render('index', {}); 
 });
 
+app.get('/index', (req, res) => {
+  res.redirect('index', {}); 
+});
 
 
 app.post('/register', (req, res) => {
