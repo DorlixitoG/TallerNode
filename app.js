@@ -28,11 +28,11 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.redirect("/registrar");
+  res.redirect("/usuarios");
 });
 
-app.get("/registrar", (req, res) => {
-  res.render("registrar", {});
+app.get("/usuarios", (req, res) => {
+  res.render("usuarios", {});
 });
 
 app.get('/index', (req, res) => {
@@ -44,7 +44,7 @@ app.get('/index', (req, res) => {
 });
 
 
-app.post('/register', (req, res) => {
+app.post('/usuarios', (req, res) => {
   const {username,email,password} = req.body
 
   const user = new User({ username,email,password })
