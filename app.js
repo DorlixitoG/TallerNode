@@ -7,7 +7,7 @@ const app = express();
 
 
 const db = require("./db");
-const Usuario = require("./models/Usuario")
+const user = require("./models/Usuario")
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -56,7 +56,7 @@ app.post('/usuarios', (req, res) => {
 app.post('/authenticate', (req, res) => {
   const { username, password } = req.body;
 
-  User.findOne({ username })
+  user.findOne({ username })
     .then(user => {
       if (!user) {
         res.status(500).send("No existe");
