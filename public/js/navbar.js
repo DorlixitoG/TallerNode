@@ -1,6 +1,3 @@
-window.alert('chimboeloco')
-
-
 // ---------Responsive-navbar-active-animation-----------
 function test() {
     var tabsNewAnim = $('#navbarSupportedContent');
