@@ -24,19 +24,19 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="formEditarUsuario" action="" method="post">
+        <form id="formCrearUsuario" action="/usuarios/crearUsuario" method="post">
           <input id="id_usuario" name="id_usuario" type="text" hidden>
           <div class="mb-3">
             <label for="nombre_editar" class="col-form-label">Nombre:</label>
-            <input id="nombre_editar" name="nombre_editar" type="text" class="form-control" placeholder="Ingrese el nombre" required>
+            <input id="nombre_editar" name="username" type="text" class="form-control" placeholder="Ingrese el nombre" required>
           </div>
           <div class="mb-3">
             <label for="correo_editar" class="col-form-label">Correo:</label>
-            <input id="correo_editar" name="correo_editar" type="email" class="form-control" placeholder="Ingrese correo" required>
+            <input id="correo_editar" name="email" type="email" class="form-control" placeholder="Ingrese correo" required>
           </div>
           <div class="mb-3">
             <label for="Contraseña_editar" class="col-form-label">Contraseña:</label>
-            <input id="Contraseña_editar" name="Contraseña_editar" type="password" placeholder="Ingrese contraseña" class="form-control" required>
+            <input id="Contraseña_editar" name="password" type="password" placeholder="Ingrese contraseña" class="form-control" required>
           </div>
           <button type="submit" class="btn btn-primary">Registrar</button>
         </form>

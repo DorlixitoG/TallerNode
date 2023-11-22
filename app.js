@@ -7,13 +7,14 @@ const app = express();
 
 
 const db = require("./db");
+const Usuario = require("./models/Usuario")
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, "public")));
 
-const usuariosRoutes = require("./routes/usuariosRoutes");
+const usuariosRoutes = require('./routes/usuariosRoutes');
 app.use(usuariosRoutes);
 
 const clientesRoutes = require("./routes/clientesRoutes");
@@ -37,27 +38,43 @@ app.get("/index", (req, res) => {
 });
 
 
-app.post("/authenticate", async (req, res) => {
-  const { correo, contraseña } = req.body;
-  try {
-    const usuario = await Usuario.findOne({ correo });
-    if (!usuario) {
-      res.status(500).send("No existe el usuario");
-    } else {
-      bcrypt.compare(contraseña, usuario.contraseña, (err, result) => {
-        if (err) {
-          res.status(500).send("Error de autenticación");
-        } else if (result) {
-          res.redirect("/index");
-        } else {
-          res.status(500).send("Contraseña incorrecta");
-        }
-      });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error al autenticar al usuario");
-  }
+app.post('/usuarios', (req, res) => {
+  const {username,email,password} = req.body
+
+  const user = new User({ username,email,password })
+
+  user.save()
+  .then(() => {
+    res.redirect("/login");
+  })
+  .catch(err => {
+    res.status(500).send("error al ingresar los datos");
+  });
+})
+
+
+app.post('/authenticate', (req, res) => {
+  const { username, password } = req.body;
+
+  User.findOne({ username })
+    .then(user => {
+      if (!user) {
+        res.status(500).send("No existe");
+      } else {
+        user.isCorrectPassword(password, (err, result) => {
+          if (err) {
+            res.status(500).send("Error de autenticacion");
+          } else if (result) {
+            res.redirect('/index');
+          } else {
+            res.status(500).send("Contraseña/Usuario incorrecto");
+          }
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send("Error pa");
+    });
 });
 
 app.listen(5000, () => {
