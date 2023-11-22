@@ -27,14 +27,13 @@ UserSchema.pre('save',function(next){
     }
 });
 
-UserSchema.methods.isCorrectPassword =function(password,callback){
-    bcrypt.compare(password,this.password,function(err,same){
-        if(err){
-            callback(err);
-        }else{
-            callback(err,same);
-        }   
+UserSchema.methods.isCorrectPassword = function (password, callback) {
+    bcrypt.compare(password, this.password, function (err, result) {
+        if (err) {
+            return callback(err);
+        }
+        return callback(null, result);
     });
-}
+};
 
 module.exports = mongoose.model('usuarios',UserSchema)

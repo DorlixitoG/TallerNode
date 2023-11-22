@@ -11,28 +11,17 @@ module.exports.getUsuarios = async (req, res) => {
   }
 };
 
-module.exports.mostrar = async function mostrar(req, res) {
-  const usuarios = await usuarios.find({});
-  return res.render("index", { usuarios: usuarios });
-};
 
-// Ruta para agregar un nuevo usuario
 module.exports.crearUsuario = async (req, res) => {
-  const { username, email, password } = req.body;
+  const {username,email,password} = req.body
 
-  try {
-    // Cifrar la contraseña
-    const hashedPassword = await bcrypt.hash(password, 10);
+  const user = new Usuario({ username,email,password })
 
-    // Crear un nuevo usuario con la contraseña cifrada
-    const usuario = new Usuario({ username, email, password: hashedPassword });
-
-    // Guardar el usuario en la base de datos
-    await usuario.save();
-
-    // Redirigir a la página de usuarios después de agregar un nuevo usuario
+  user.save()
+  .then(() => {
     res.redirect("/usuarios");
-  } catch (error) {
-    res.status(500).send("Error al agregar un nuevo usuario");
-  }
-};
+  })
+  .catch(err => {
+    res.status(500).send("error al ingresar los datos");
+  });
+}

@@ -20,6 +20,9 @@ app.use(usuariosRoutes);
 const clientesRoutes = require("./routes/clientesRoutes");
 app.use(clientesRoutes);
 
+const loginRoutes = require("./routes/loginRoutes");
+app.use(loginRoutes);
+
 // Configurar el motor de plantillas (usando EJS)
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -36,21 +39,6 @@ app.get("/login", (req, res) => {
 app.get("/index", (req, res) => {
   res.render("index", {});
 });
-
-
-app.post('/usuarios', (req, res) => {
-  const {username,email,password} = req.body
-
-  const user = new User({ username,email,password })
-
-  user.save()
-  .then(() => {
-    res.redirect("/login");
-  })
-  .catch(err => {
-    res.status(500).send("error al ingresar los datos");
-  });
-})
 
 
 app.post('/authenticate', (req, res) => {
