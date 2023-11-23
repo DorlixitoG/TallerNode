@@ -4,10 +4,18 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const app = express();
-
-
+const flash = require('express-flash');
+const session = require('express-session');
 const db = require("./db");
 const user = require("./models/Usuario")
+
+
+app.use(session({
+  secret: 'DRLX',
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(flash());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,7 +31,6 @@ app.use(clientesRoutes);
 const loginRoutes = require("./routes/loginRoutes");
 app.use(loginRoutes);
 
-// Configurar el motor de plantillas (usando EJS)
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 

@@ -8,20 +8,23 @@ module.exports.login = async (req, res) => {
     Usuario.findOne({ username })
       .then(Usuario => {
         if (!Usuario) {
-          res.status(500).send("No existe");
+          req.flash('error', 'Usuario no encontrado');
+          res.redirect("/login");
         } else {
             Usuario.isCorrectPassword(password, (err, result) => {
             if (err) {
-              res.status(500).send("Error de autenticacion");
+              req.flash('error', 'Error de autenticación');
+              res.redirect("/login");
             } else if (result) {
               res.redirect('/index');
             } else {
-              res.status(500).send("Contraseña/Usuario incorrecto");
+              req.flash('error', 'Contraseña incorrecta');
+              res.redirect("/login");
             }
           });
         }
       })
       .catch(err => {
-        res.status(500).send("Error pa");
+        req.flash('error', 'Error interno del servidor');
       });
   };

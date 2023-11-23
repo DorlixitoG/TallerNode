@@ -38,6 +38,18 @@
         </div>
 
       </form>
+      <br>
+<% if (messages.success) { %>
+  <div class="alert alert-success" role="alert">
+    <%= messages.success %>
+  </div>
+<% } else if (messages.error) { %>
+  <div class="alert alert-danger" role="alert">
+    <%= messages.error %>
+  </div>
+<% } %>
+
+
 
 
 
