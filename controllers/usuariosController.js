@@ -26,3 +26,17 @@ module.exports.crearUsuario = async (req, res) => {
     res.status(500).send("Error al obtener la lista de usuarios");
   }
 }
+
+module.exports.editarUsuario = 
+async function editar(req, res){
+    const id = req.body.id_editar
+    const username = req.body.usuario_editar
+    const email = req.body.email_editar
+
+    try {
+        await Alumno.findByIdAndUpdate(id, {username, email})
+        res.redirect('/')
+    } catch (error){
+        console.log(error)
+    }
+}

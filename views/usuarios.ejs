@@ -100,16 +100,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/editar" method="post">
+        <form action="/editarUsuario" method="post">
           <input name="id_editar" id="id_editar" type="text" hidden>
           <div class="mb-3">
             <label for="nombre_editar" class="col-form-label">Nombre:</label>
-            <input id="nombre_editar" name="nombre_editar" type="text" class="form-control" value="">
+            <input id="nombre_editar" name="usuario_editar" type="text" class="form-control" value="">
           </div>
           <div class="mb-3">
             <label for="edad_editar" class="col-form-label">Edad:</label>
-            <input id="edad_editar" name="edad_editar" type="number" class="form-control" value="">
+            <input id="edad_editar" name="email_editar" type="number" class="form-control" value="">
           </div>
+
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Actualizar</button>
           </div> 

@@ -9,6 +9,9 @@ router.get("/usuarios", usuariosController.getUsuarios);
 // Ruta para agregar un nuevo usuario
 router.post("/crearUsuario", usuariosController.crearUsuario);
 
+router.post("/editarUsuario", usuariosController.editarUsuario);
+
+
 // 
 
 module.exports = router;
