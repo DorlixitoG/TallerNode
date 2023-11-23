@@ -7,7 +7,7 @@ const Usuario =  require("../models/Usuario")
 router.get("/usuarios", usuariosController.getUsuarios);
 
 // Ruta para agregar un nuevo usuario
-router.post("/usuarios/crearUsuario", usuariosController.crearUsuario);
+router.post("/crearUsuario", usuariosController.crearUsuario);
 
 // 
 

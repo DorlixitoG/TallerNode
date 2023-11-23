@@ -24,7 +24,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="formCrearUsuario" action="/usuarios/crearUsuario" method="post">
+        <form id="formCrearUsuario" action="/crearUsuario" method="post">
           <input id="id_usuario" name="id_usuario" type="text" hidden>
           <div class="mb-3">
             <label for="nombre_editar" class="col-form-label">Nombre:</label>
@@ -92,8 +92,31 @@
   </table>
 </div>
 
-<div id="modalUsuario" class="modal fade" tabindex="-1" aria-labelledby="modalUsuario" aria-hidden="true">
-  <!-- Contenido del modal para editar usuario -->
+<div id="modalUsuarioEditar" class="modal fade" tabindex="-1" aria-labelledby="modalAlumno" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Info</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/editar" method="post">
+          <input name="id_editar" id="id_editar" type="text" hidden>
+          <div class="mb-3">
+            <label for="nombre_editar" class="col-form-label">Nombre:</label>
+            <input id="nombre_editar" name="nombre_editar" type="text" class="form-control" value="">
+          </div>
+          <div class="mb-3">
+            <label for="edad_editar" class="col-form-label">Edad:</label>
+            <input id="edad_editar" name="edad_editar" type="number" class="form-control" value="">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+          </div> 
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <%- include('template/footer') %>

@@ -8,6 +8,7 @@ const flash = require('express-flash');
 const session = require('express-session');
 const db = require("./db");
 const user = require("./models/Usuario")
+const {body, validationResult} = require('express-validator')
 
 
 app.use(session({
@@ -16,15 +17,6 @@ app.use(session({
   saveUninitialized: true
 }));
 app.use(flash());
-
-
-
-
-
-
-
-
-
 
 
 app.use(bodyParser.json());
@@ -57,6 +49,30 @@ app.get("/index", (req, res) => {
   res.render("index", {});
 });
 
+app.post("/crearUsuario", [
+  body('username', 'Ingrese un nombre')
+  .exists()
+  .isLength({min:5}),
+  body('email','Ingrese un E-mail válido')
+  .exists()
+  .isEmail(),
+  body('password', 'Ingrese una contraseña')
+  .exists()
+  .isLength({min:4}),
+], (req, res)=>{
+
+  //Validacion propia
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+      console.log(req.body)
+      const valores = req.body
+      const validaciones=errors.array()
+      res.render('usuario',{validaciones:validaciones, valores})
+      res.redirect("/usuarios");
+  }else{
+      res.send('!Validacion Exitosa!')
+  }
+})
 
 app.post('/authenticate', (req, res) => {
   const { username, password } = req.body;
