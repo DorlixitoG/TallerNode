@@ -9,6 +9,16 @@ const app = express();
 const db = require("./db");
 const user = require("./models/Usuario")
 
+
+
+
+
+
+
+
+
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
