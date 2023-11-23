@@ -84,7 +84,7 @@
           <td><%= usuario.password %></td>
           <td class="d-flex">
             <a type="button" class="btnEditar btn btn-outline-primary bi bi-pencil"></a>
-            <a href="/borrar/<%= usuario._id %>" class="btn btn-outline-danger bi bi-trash"></a>
+            <a href="/borrarUsuario/<%= usuario._id %>" class="btn btn-outline-danger bi bi-trash"></a>
           </td>
         </tr>
       <% }) %>
@@ -103,12 +103,12 @@
         <form action="/editarUsuario" method="post">
           <input name="id_editar" id="id_editar" type="text" hidden>
           <div class="mb-3">
-            <label for="nombre_editar" class="col-form-label">Nombre:</label>
-            <input id="nombre_editar" name="usuario_editar" type="text" class="form-control" value="">
+            <label for="usuario_editar" class="col-form-label">Nombre:</label>
+            <input id="usuario_editar" name="usuario_editar" type="text" class="form-control" value="">
           </div>
           <div class="mb-3">
-            <label for="edad_editar" class="col-form-label">Edad:</label>
-            <input id="edad_editar" name="email_editar" type="number" class="form-control" value="">
+            <label for="email_editar" class="col-form-label">Edad:</label>
+            <input id="email_editar" name="email_editar" type="email" class="form-control" value="">
           </div>
 
           <div class="modal-footer">

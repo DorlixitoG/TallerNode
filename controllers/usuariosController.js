@@ -34,8 +34,20 @@ async function editar(req, res){
     const email = req.body.email_editar
 
     try {
-        await Alumno.findByIdAndUpdate(id, {username, email})
-        res.redirect('/')
+        await Usuario.findByIdAndUpdate(id, {username, email})
+        res.redirect('/usuarios')
+    } catch (error){
+        console.log(error)
+    }
+}
+
+
+module.exports.borrarUsuario =
+async function borrar(req, res){
+    const id =req.params.id;
+    try {
+        await Usuario.findByIdAndDelete(id)
+        res.redirect('/usuarios')
     } catch (error){
         console.log(error)
     }
