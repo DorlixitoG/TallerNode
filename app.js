@@ -7,7 +7,7 @@ const app = express();
 const flash = require('express-flash');
 const session = require('express-session');
 const db = require("./db");
-const user = require("./models/Usuario")
+const user = require("./models/Usuario");
 const {body, validationResult} = require('express-validator')
 
 
@@ -73,6 +73,10 @@ app.post("/crearUsuario", [
       res.send('!Validacion Exitosa!')
   }
 })
+
+app.get("/clientes", (req, res) => {
+  res.render("clientes", {});
+});
 
 app.post('/authenticate', (req, res) => {
   const { username, password } = req.body;

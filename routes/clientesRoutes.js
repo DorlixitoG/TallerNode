@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const clientesController = require("../controllers/clientesController");
+const Cliente =  require("../models/Cliente")
 
-// Ruta para obtener la lista de clientes
 router.get("/clientes", clientesController.getClientes);
 
-// Ruta para agregar un nuevo cliente
-router.post("/", clientesController.agregarCliente);
+router.post("/crearCliente", clientesController.crearCliente);
+
+router.post("/editarCliente", clientesController.editarCliente);
+
+router.get('/borrar/:id', clientesController.borrar)
 
 module.exports = router;
