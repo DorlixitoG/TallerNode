@@ -9,7 +9,7 @@
 </head>
 
 <div class="container">
-  <h1 class="text-primary">producto</h1>
+  <h1 class="text-primary">Producto</h1>
 
  <!-- Modal para Registrar producto -->
 <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalProducto">
@@ -27,24 +27,24 @@
         <form action="/crear" method="POST" enctype="multipart/form-data">
           <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
-            <input id="nombre" name="nombre" type="text" class="form-control" >
+            <input id="nombre" name="nombre" type="text" class="form-control" required>
           </div>
           <div class="mb-3">
             <label for="precio" class="form-label">Precio</label>
             <input id="precio" name="precio" type="number" class="form-control" 
-            >
+            required>
           </div>
           <div class="mb-3">
             <label for="cantidad" class="form-label">Cantidad</label>
-            <input id="cantidad" name="cantidad" type="number" class="form-control" >
+            <input id="cantidad" name="cantidad" type="number" class="form-control" required>
           </div>
           <div class="mb-3">
             <label for="imagen" class="form-label">Imagen</label>
-            <input id="imagen" name="imagen" type="file"   class="form-control" >
+            <input id="imagen" name="imagen" type="file"   class="form-control" required>
           </div>
           <div class="mb-3">
             <label for="color" class="form-label">Color</label>
-            <input id="color" name="color" type="text" class="form-control" >
+            <input id="color" name="color" type="text" class="form-control" required>
           </div>
           <div class="mb-3">
             <label for="talla" class="form-label">Talla</label>

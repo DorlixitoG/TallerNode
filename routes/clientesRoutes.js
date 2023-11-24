@@ -9,6 +9,6 @@ router.post("/crearCliente", clientesController.crearCliente);
 
 router.post("/editarCliente", clientesController.editarCliente);
 
-router.get('/borrar/:id', clientesController.borrar)
+router.get('/borrarCliente/:id', clientesController.borrarCliente)
 
 module.exports = router;

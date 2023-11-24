@@ -46,7 +46,7 @@ async function editar(req, res){
 };
 
 // Ruta para borrar cliente
-module.exports.borrar = async function (req, res) {
+module.exports.borrarCliente = async function (req, res) {
   const id = req.params.id;
   try {
     await Cliente.findByIdAndDelete(id);
