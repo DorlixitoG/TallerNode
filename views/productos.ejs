@@ -1,0 +1,141 @@
+<%- include('template/cabecera', { tituloweb: 'Página de compras' }) %>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  .container {
+    max-width: 960px;
+  }
+</style>
+</head>
+
+<div class="container">
+  <h1 class="text-primary">producto</h1>
+
+ <!-- Modal para Registrar producto -->
+<button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalProducto">
+  Registrar producto
+</button>
+
+<div id="modalProducto" class="modal fade" tabindex="-1" aria-labelledby="modalProducto" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registrar Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/crear" method="POST" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input id="nombre" name="nombre" type="text" class="form-control" >
+          </div>
+          <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input id="precio" name="precio" type="number" class="form-control" 
+            >
+          </div>
+          <div class="mb-3">
+            <label for="cantidad" class="form-label">Cantidad</label>
+            <input id="cantidad" name="cantidad" type="number" class="form-control" >
+          </div>
+          <div class="mb-3">
+            <label for="imagen" class="form-label">Imagen</label>
+            <input id="imagen" name="imagen" type="file"   class="form-control" >
+          </div>
+          <div class="mb-3">
+            <label for="color" class="form-label">Color</label>
+            <input id="color" name="color" type="text" class="form-control" >
+          </div>
+          <div class="mb-3">
+            <label for="talla" class="form-label">Talla</label>
+            <input id="talla" name="talla" type="text" class="form-control" >
+          </div>
+        <button type="submit" class="w-100 btn btn-primary"><i class="bi bi-save"></i>Registrar </button>
+    
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+   <!-- Tabla productos  -->
+   <table id="tablaAlumnos" class="table mt-4">
+    <thead>
+      <tr>
+        <th style="display: none;">ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Imagen</th>
+        <th>Color</th>
+        <th>Talla</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% productos.forEach((producto) => { %>
+      <tr>
+        <td style="display: none;"><%= producto._id %></td>
+        <td><%= producto.nombre %></td>
+        <td><%= producto.precio %></td>
+        <td><%= producto.cantidad %></td>
+        <td><img src="<%= producto.imagen%>" alt="" width="120px" height="120px"></td>
+        <td><%= producto.color%></td>
+        <td><%= producto.talla %></td>
+        <td>
+          <a type="button" class="btnEditar btn btn-outline-primary bi bi-pencil"></a>
+          <a href="/borrar/<%= producto._id %>" class="btn btn-outline-danger bi bi-trash"></a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<!-- modal editar -->
+<div id="modalAlumno" class="modal fade" tabindex="-1" aria-labelledby="modalAlumno" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Info</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/editar" method="post">
+          <input name="id_editar" id="id_editar" type="text" hidden>
+          <div class="mb-3">
+            <label for="nombre_editar" class="col-form-label">Nombre:</label>
+            <input id="nombre_editar" name="nombre_editar" type="text" class="form-control" value="">
+          </div>
+          <div class="mb-3">
+            <label for="precio_editar" class="col-form-label">precio:</label>
+            <input id="precio_editar" name="precio_editar" type="number" class="form-control" value="">
+          </div>
+          <div class="mb-3">
+            <label for="cantidad_editar" class="col-form-label">cantidad:</label>
+            <input id="cantidad_editar" name="cantidad_editar" type="number" class="form-control" value="">
+          </div>
+          <div class="mb-3">
+            <input id="imagen_editar" name="imagen_editar" type="text" class="form-control" value="" hidden>
+          </div>
+          <div class="mb-3">
+            <label for="color_editar" class="col-form-label">color:</label>
+            <input id="color_editar" name="color_editar" type="text" class="form-control" value="">
+          </div>
+          <div class="mb-3">
+            <label for="talla_editar" class="col-form-label">talla:</label>
+            <input id="talla_editar" name="talla_editar" type="text" class="form-control" value="">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+          </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('template/footer') %>
+

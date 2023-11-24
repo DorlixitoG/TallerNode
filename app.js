@@ -8,8 +8,7 @@ const flash = require('express-flash');
 const session = require('express-session');
 const db = require("./db");
 const user = require("./models/Usuario");
-const {body, validationResult} = require('express-validator')
-
+const port = 3005;
 
 app.use(session({
   secret: 'DRLX',
@@ -23,6 +22,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, "public")));
+
+
+// Establecer la carpeta de archivos estáticos
+app.use(express.static(path.join(__dirname, 'storage')));
+
+
+//llamar a la ruta para los metodos crud
+const productos = require('./routes/productosRoutes');
+app.use(productos);
 
 const usuariosRoutes = require('./routes/usuariosRoutes');
 app.use(usuariosRoutes);
@@ -80,31 +88,12 @@ app.get("/ventas", (req, res) => {
 });
 
 
-app.post("/crearCompra", [
-  body('proveedor', 'Ingrese un nombre valido')
-  .exists()
-  .isLength({min:5}),
-  body('fecha','Ingrese una fecha válida')
-  .exists()
-  .isDate(),
-  body('password', 'Ingrese una contraseña')
-  .exists()
-  .isNumeric(),
-], (req, res)=>{
-ia
-  const errors = validationResult(req)
-  if (!errors.isEmpty()) {
-      console.log(req.body)
-      const valores = req.body
-      const validaciones=errors.array()
-      res.render('compras',{validaciones:validaciones, valores})
-      res.redirect("/compras");
-  }else{
-      res.send('!Validacion Exitosa!')
-  }
-})
+app.get("/productos", (req, res) => {
+  res.render("productos", {});
+});
 
 
-app.listen(5000, () => {
-  console.log("Server started on port 5000");
+
+app.listen(port, () => {
+  console.log("Server started on port ",port);
 });
