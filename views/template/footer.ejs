@@ -1,26 +1,21 @@
 <body>
-    <!-- Contenido de tu página -->
-  
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js "></script>
+    <script src="/js/bootstrap.min.js "></script>
+    <script src="/js/navbar.js "></script>
+    <script src="/js/modalCliente.js"></script>
     <script src="/js/modalUsuario.js"></script>
-
-
-
-
-    
-    <script src="/js/modalVenta.js"></script>
-  
-    <!-- Coloca este script al final para asegurarte de que se ejecute después de que se haya cargado el DOM -->
+    <script src="/js/modalCompras.js"></script>
+    <script src="/js/modalProveedores.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-        var toastList = toastElList.map(function (toastEl) {
-          return new bootstrap.Toast(toastEl)
+        document.addEventListener('DOMContentLoaded', function () {
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+            var toastList = toastElList.map(function (toastEl) {
+                return new bootstrap.Toast(toastEl)
+            });
+            toastList.forEach(toast => toast.show());
         });
-        toastList.forEach(toast => toast.show());
-      });
     </script>
-  </body>
-  </html>
-  
+
+</body>
+
+</html>

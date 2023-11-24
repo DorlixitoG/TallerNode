@@ -11,18 +11,61 @@
 </head>
 <div class="container">
   <h1 class="text-primary">Clientes</h1>
-  <!-- Formulario para agregar nuevo cliente -->
-  <form action="/crear" method="post">
-    <label for="nombre" class="form-label">Nombre</label>
-    <input id="nombre" name="nombre" type="text" class="form-control" required>
-    <label for="direccion" class="form-label">Dirección</label>
-    <input id="direccion" name="direccion" type="text" class="form-control" required>
-    <label for="telefono" class="form-label">Teléfono</label>
-    <input id="telefono" name="telefono" type="tel" class="form-control" required>
-    <label for="documento" class="form-label">Documento</label>
-    <input id="documento" name="documento" type="text" class="form-control" required>
-    <button type="submit" class="w-100 btn btn-guardar btn-lg"><i class="bi bi-save"></i>Registrar Cliente</button>
-  </form>
+  <!-- Modal para agregar nuevo cliente -->
+  <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalCliente">
+    Registrar Cliente
+  </button>
+  
+  <div id="modalCliente" class="modal fade" tabindex="-1" aria-labelledby="modalCliente" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Registrar Cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formCrearCliente" action="/crearCliente" method="post">
+            <input id="id_cliente" name="id_cliente" type="text" hidden>
+            <div class="mb-3">
+              <label for="nombre_editar" class="col-form-label">Nombre:</label>
+              <input id="nombre_editar" name="nombre" type="text" class="form-control" placeholder="Ingrese el nombre" required>
+            </div>
+            <div class="mb-3">
+              <label for="direccion_editar" class="col-form-label">Dirección:</label>
+              <input id="direccion_editar" name="direccion" type="text" class="form-control" placeholder="Ingrese la dirección" required>
+            </div>
+            <div class="mb-3">
+              <label for="telefono_editar" class="col-form-label">Telefono:</label>
+              <input id="telefono_editar" name="telefono" type="number" class="form-control" placeholder="Ingrese el telefono" required>
+            </div>
+            <div class="mb-3">
+              <label for="documento_editar" class="col-form-label">Documento:</label>
+              <input id="documento_editar" name="documento" type="number" class="form-control" placeholder="Ingrese el documento" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+          </form>
+          <% if(typeof validaciones != 'undefined') { %>
+            <% validaciones.forEach( (validacion)  => { %>
+              <div class="toast-container">
+                <div class="toast" role="alert" aria-live="assertive" data-bs-autohide="false">
+                  <div class="toast-header">
+                    <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%"
+                      height="100%" fill="#007aff"></rect></svg>
+                      <strong class="me-auto">!Atencion!</strong>
+                      <button type="button" class="btn-close" data-bsdismiss="toast"
+                    aria-label="Close"></button>
+                  </div>
+                  <div class="toast-body">
+                    <strong><%= validacion.msg%></strong>
+                  </div>
+                </div>
+              </div>
+              <% })%>
+              <% } %>
+        </div>
+      </div>
+    </div>
+  </div>   
 
   <!-- Tabla de clientes -->
   <table id="tablaClientes" class="table mt-4">
@@ -33,7 +76,6 @@
         <th>Dirección</th>
         <th>Teléfono</th>
         <th>Documento</th>
-        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -44,8 +86,8 @@
           <td><%= cliente.direccion %></td>
           <td><%= cliente.telefono %></td>
           <td><%= cliente.documento %></td>
-          <td>
-            <a type="button" class="btnEditar btn btn-outline-primary bi bi-pencil"></a>
+          <td class="d-flex">
+            <a type="button" class="btnEditarC btn btn-outline-primary bi bi-pencil"></a>
             <a href="/borrar/<%= cliente._id %>" class="btn btn-outline-danger bi bi-trash"></a>
           </td>
         </tr>
@@ -54,8 +96,40 @@
   </table>
 </div>
 
-<div id="modalCliente" class="modal fade" tabindex="-1" aria-labelledby="modalCliente" aria-hidden="true">
-  <!-- Contenido del modal para editar cliente -->
+<div id="modalClienteEditar" class="modal fade" tabindex="-1" aria-labelledby="modalCliente" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Info</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/editarCliente" method="post">
+          <input name="id_editar" id="id_editar" type="text" hidden>
+          <div class="mb-3">
+            <label for="nombreC_editar" class="col-form-label">Nombre:</label>
+            <input id="nombreC_editar" name="nombreC_editar" type="text" class="form-control" value="">
+          </div>
+          <div class="mb-3">
+            <label for="direccionC_editar" class="col-form-label">Dirección:</label>
+            <input id="direccionC_editar" name="direccionC_editar" type="text" class="form-control" value="">
+          </div>
+          <div class="mb-3">
+            <label for="telefonoC_editar" class="col-form-label">Telefono:</label>
+            <input id="telefonoC_editar" name="telefonoC_editar" type="text" class="form-control" value="">
+          </div>
+          <div class="mb-3">
+            <label for="documentoC_editar" class="col-form-label">Documento:</label>
+            <input id="documentoC_editar" name="documentoC_editar" type="text" class="form-control" value="">
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+          </div> 
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <%- include('template/footer') %>
