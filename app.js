@@ -36,6 +36,10 @@ app.use(loginRoutes);
 const comprasRoutes = require("./routes/comprasRoutes");
 app.use(comprasRoutes);
 
+const proveedoresRoutes = require("./routes/proveedoresRoutes");
+app.use(proveedoresRoutes);
+
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
@@ -55,6 +59,10 @@ app.get("/index", (req, res) => {
 
 app.get("/compras", (req, res) => {
   res.render("compras", {});
+});
+
+app.get("/proveedores", (req, res) => {
+  res.render("proveedores", {});
 });
 
 
