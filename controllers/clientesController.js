@@ -1,6 +1,5 @@
 const Cliente = require("../models/Cliente");
 
-// Ruta para obtener la lista de clientes
 exports.getClientes = async (req, res) => {
   try {
     const clientes = await Cliente.find();
@@ -10,7 +9,6 @@ exports.getClientes = async (req, res) => {
   }
 };
 
-// Ruta para agregar un nuevo cliente
 exports.agregarCliente = async (req, res) => {
   const { nombre, direccion, telefono, documento } = req.body;
 

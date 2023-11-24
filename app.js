@@ -33,6 +33,9 @@ app.use(clientesRoutes);
 const loginRoutes = require("./routes/loginRoutes");
 app.use(loginRoutes);
 
+const comprasRoutes = require("./routes/comprasRoutes");
+app.use(comprasRoutes);
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
@@ -49,54 +52,36 @@ app.get("/index", (req, res) => {
   res.render("index", {});
 });
 
-app.post("/crearUsuario", [
-  body('username', 'Ingrese un nombre')
+
+app.get("/compras", (req, res) => {
+  res.render("compras", {});
+});
+
+
+app.post("/crearCompra", [
+  body('proveedor', 'Ingrese un nombre valido')
   .exists()
   .isLength({min:5}),
-  body('email','Ingrese un E-mail válido')
+  body('fecha','Ingrese una fecha válida')
   .exists()
-  .isEmail(),
+  .isDate(),
   body('password', 'Ingrese una contraseña')
   .exists()
-  .isLength({min:4}),
+  .isNumeric(),
 ], (req, res)=>{
-
-  //Validacion propia
+ia
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
       console.log(req.body)
       const valores = req.body
       const validaciones=errors.array()
-      res.render('usuario',{validaciones:validaciones, valores})
-      res.redirect("/usuarios");
+      res.render('compras',{validaciones:validaciones, valores})
+      res.redirect("/compras");
   }else{
       res.send('!Validacion Exitosa!')
   }
 })
 
-app.post('/authenticate', (req, res) => {
-  const { username, password } = req.body;
-
-  user.findOne({ username })
-    .then(user => {
-      if (!user) {
-        res.status(500).send("No existe");
-      } else {
-        user.isCorrectPassword(password, (err, result) => {
-          if (err) {
-            res.status(500).send("Error de autenticacion");
-          } else if (result) {
-            res.redirect('/index');
-          } else {
-            res.status(500).send("Contraseña/Usuario incorrecto");
-          }
-        });
-      }
-    })
-    .catch(err => {
-      res.status(500).send("Error pa");
-    });
-});
 
 app.listen(5000, () => {
   console.log("Server started on port 5000");

@@ -3,11 +3,11 @@
     <script src="/js/bootstrap.min.js "></script>
     <script src="/js/navbar.js "></script>
     <script src="/js/modalUsuario.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/modalCompras.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function (){
+        document.addEventListener('DOMContentLoaded', function () {
             var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-            var toastList = toastElList.map(function(toastEl){
+            var toastList = toastElList.map(function (toastEl) {
                 return new bootstrap.Toast(toastEl)
             });
             toastList.forEach(toast => toast.show());
@@ -15,4 +15,5 @@
     </script>
 
 </body>
+
 </html>
