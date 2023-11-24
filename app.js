@@ -82,7 +82,6 @@ app.get("/proveedores", (req, res) => {
 });
 
 
-
 app.get("/ventas", (req, res) => {
   res.render("ventas", {});
 });
@@ -93,6 +92,9 @@ app.get("/productos", (req, res) => {
 });
 
 
+app.use((req,res,next)=>{
+  res.status(404).render("404",{titulo:"404",descripcion:"Pagina no encontrada"})
+})
 
 app.listen(port, () => {
   console.log("Server started on port ",port);
