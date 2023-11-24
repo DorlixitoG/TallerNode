@@ -19,7 +19,6 @@ module.exports.crearUsuario = async (req, res) => {
     const { username, email, password } = req.body
 
     const user = new Usuario({ username, email, password })
-
     await user.save();
     res.redirect("/usuarios");
   } catch (err) {

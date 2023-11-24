@@ -1,18 +1,26 @@
 <body>
-    <script src="/js/bootstrap.bundle.min.js "></script>
-    <script src="/js/bootstrap.min.js "></script>
-    <script src="/js/navbar.js "></script>
-    <script src="/js/modalUsuario.js"></script>
+    <!-- Contenido de tu página -->
+  
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function (){
-            var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-            var toastList = toastElList.map(function(toastEl){
-                return new bootstrap.Toast(toastEl)
-            });
-            toastList.forEach(toast => toast.show());
-        });
-    </script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/modalUsuario.js"></script>
 
-</body>
-</html>
+
+
+
+    
+    <script src="/js/modalVenta.js"></script>
+  
+    <!-- Coloca este script al final para asegurarte de que se ejecute después de que se haya cargado el DOM -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function (toastEl) {
+          return new bootstrap.Toast(toastEl)
+        });
+        toastList.forEach(toast => toast.show());
+      });
+    </script>
+  </body>
+  </html>
+  

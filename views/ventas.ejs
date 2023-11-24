@@ -1,0 +1,132 @@
+<%- include('template/cabecera', { tituloweb: 'Página de Ventas' }) %>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="...">
+
+<!-- Bootstrap JS y Popper.js CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="..."></script>
+
+<title>CRUD MONGO DB - Ventas</title>
+<style>
+  .container {
+    max-width: 960px;
+  }
+</style>
+</head>
+<div class="container">
+  <h1 class="text-primary">Ventas</h1>
+
+  <!-- Modal para Registrar venta -->
+  <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalVentas">
+    Registrar Venta
+  </button>
+
+  <div id="modalVentas" class="modal fade" tabindex="-1" aria-labelledby="modalVentas" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Registrar Venta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formCrearVenta" action="/crearVenta" method="post">
+            <input id="id_venta" name="id_venta" type="text" hidden>
+            <div class="mb-3">
+              <label for="nombre_venta" class="col-form-label">Nombre:</label>
+              <input id="nombre_venta" name="nombre" type="text" class="form-control" placeholder="Ingrese el nombre">
+            </div>
+            <div class="mb-3">
+              <label for="fecha_venta" class="col-form-label">Fecha:</label>
+              <input id="fecha_venta" name="fecha" type="date" class="form-control" placeholder="Seleccione la fecha">
+            </div>
+            <div class="mb-3">
+              <label for="total_venta" class="col-form-label">Total:</label>
+              <input id="total_venta" name="total" type="number" placeholder="Ingrese el total" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+          </form>
+          <% if(typeof validaciones != 'undefined') { %>
+            <% validaciones.forEach( (validacion)  => { %>
+              <div class="toast-container">
+                <div class="toast" role="alert" aria-live="assertive" data-bs-autohide="false">
+                  <div class="toast-header">
+                    <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%"
+                      height="100%" fill="#007aff"></rect></svg>
+                      <strong class="me-auto">!Atencion!</strong>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div class="toast-body">
+                    <strong><%= validacion.msg%></strong>
+                  </div>
+                </div>
+              </div>
+              <% })%>
+              <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla de ventas -->
+  <table id="tablaVentas" class="table mt-4">
+    <thead>
+      <tr>
+        <th style="display: none;">ID</th>
+        <th>Nombre</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Ventas.forEach((venta) => { %>
+        <tr>
+          <td style="display: none;"><%= venta._id %></td>
+          <td><%= venta.nombre %></td>
+          <td><%= venta.fecha %></td>
+          <td><%= venta.total %></td>
+          <td class="d-flex">
+            <a type="button" class="btnEditarV btn btn-outline-primary bi bi-pencil"></a>
+            <a href="/borrarVenta/<%= venta._id %>" class="btn btn-outline-danger bi bi-trash"></a>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <!-- Modal para Editar venta -->
+<div id="modalVentaEditar" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="exampleModalLabel">Editar Venta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditarVenta" action="/editarVenta" method="post">
+            <input name="id_editar" id="id_editar" type="text" hidden>
+            <div class="mb-3">
+              <label for="nombre_editar" class="col-form-label">Nombre:</label>
+              <input id="nombre_editar" name="nombre_editar" type="text" class="form-control" value="">
+            </div>
+            <div class="mb-3">
+              <label for="fecha_editar" class="col-form-label">Fecha:</label>
+              <input id="fecha_editar" name="fecha_editar" type="text" class="form-control" value="">
+            </div>
+            <div class="mb-3">
+              <label for="total_editar" class="col-form-label">Total:</label>
+              <input id="total_editar" name="total_editar" type="number" class="form-control" value="">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Actualizar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('template/footer') %>

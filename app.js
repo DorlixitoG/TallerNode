@@ -27,6 +27,17 @@ app.use(express.static(path.join(__dirname, "public")));
 const usuariosRoutes = require('./routes/usuariosRoutes');
 app.use(usuariosRoutes);
 
+
+
+
+
+
+
+
+
+const ventasRoutes = require('./routes/ventasRoutes');
+app.use(ventasRoutes);
+
 const clientesRoutes = require("./routes/clientesRoutes");
 app.use(clientesRoutes);
 
@@ -69,6 +80,41 @@ app.post("/crearUsuario", [
       const validaciones=errors.array()
       res.render('usuario',{validaciones:validaciones, valores})
       res.redirect("/usuarios");
+  }else{
+      res.send('!Validacion Exitosa!')
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+app.post("/crearVenta", [
+  body('nombre', 'Ingrese un nombre')
+  .exists()
+  .isLength({min:10}),
+  body('fecha','Ingrese una fecha')
+  .exists()
+  .isDate(),
+  body('Total', 'Ingrese un total')
+  .exists()
+  .isLength({min:5}),
+], (req, res)=>{
+
+  //Validacion propia
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+      console.log(req.body)
+      const valores = req.body
+      const validaciones=errors.array()
+      res.render('venta',{validaciones:validaciones, valores})
+      res.redirect("/ventas");
   }else{
       res.send('!Validacion Exitosa!')
   }
